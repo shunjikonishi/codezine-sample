@@ -104,7 +104,11 @@ public class BoardServlet extends HttpServlet {
 	}
 
 	private String getNicknameFromCookie(HttpServletRequest req) {
-		for (Cookie cookie : req.getCookies()) {
+		Cookie[] cookies = req.getCookies();
+		if (cookies == null) {
+			return null;
+		}
+		for (Cookie cookie : cookies) {
 			if ("nickname".equals(cookie.getName())) {
 				return cookie.getValue();
 			}
