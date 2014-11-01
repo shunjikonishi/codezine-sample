@@ -14,7 +14,7 @@ import com.samskivert.mustache.Mustache;
 
 public class TemplateEngine {
 
-	private static final String BASE = "target/heroku-samples/WEB-INF/";
+	private static final String BASE = "target/heroku-sample/WEB-INF/";
 
 	private static final TemplateEngine instance = new TemplateEngine();
 	private static final Template baseTemplate;

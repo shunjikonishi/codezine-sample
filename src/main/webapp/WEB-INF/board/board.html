@@ -1,0 +1,35 @@
+<div>
+	<p>メッセージを入力してください</p>
+	<form role="form" action="/board" method="POST">
+		<div class="form-group">
+			<label for="nickname" class="control-label">ニックネーム</label>
+			<input type="text" class="form-control" name="nickname" value="{{nickname}}" max-length="40" required>
+		</div>
+		<div class="form-group">
+			<label for="message" class="control-label">メッセージ</label>
+			<textarea name="message" class="form-control"></textarea>
+		</div>
+		<button type="submit" class="btn btn-default">投稿</button>
+	</form>
+</div>
+<hr>
+<div id="messages">
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ニックネーム</th>
+				<th>メッセージ</th>
+				<th>投稿日時</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#messages}}
+			<tr>
+				<td>{{nickname}}</td>
+				<td>{{message}}</td>
+				<td>{{postDate}}</td>
+			</tr>
+			{{/messages}}
+		</tbody>
+	</table>
+</div>
