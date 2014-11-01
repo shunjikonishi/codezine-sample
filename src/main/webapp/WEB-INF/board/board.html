@@ -14,7 +14,7 @@
 </div>
 <hr>
 <div id="messages">
-	<table border="1">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>ニックネーム</th>
@@ -26,7 +26,11 @@
 			{{#messages}}
 			<tr>
 				<td>{{nickname}}</td>
-				<td>{{message}}</td>
+				<td>
+					{{#message}}
+						{{.}}<br>
+					{{/message}}
+				</td>
 				<td>{{postDate}}</td>
 			</tr>
 			{{/messages}}

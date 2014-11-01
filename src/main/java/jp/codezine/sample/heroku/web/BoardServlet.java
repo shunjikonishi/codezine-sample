@@ -39,7 +39,7 @@ public class BoardServlet extends HttpServlet {
 						while(rs.next()) {
 							Message msg = new Message();
 							msg.nickname = rs.getString("nickname");
-							msg.message = rs.getString("message");
+							msg.message = rs.getString("message").split("\n");
 							msg.postDate = sdf.format(rs.getTimestamp("post_date"));
 							list.add(msg);
 						}
@@ -70,6 +70,7 @@ public class BoardServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		String nickname = req.getParameter("nickname");
 		String message = req.getParameter("message");
 		if (nickname == null || message == null) {
@@ -123,7 +124,7 @@ public class BoardServlet extends HttpServlet {
 
 	public static class Message {
 		public String nickname;
-		public String message;
+		public String[] message;
 		public String postDate;
 	}
 }
