@@ -1,6 +1,9 @@
 package jp.codezine.sample.heroku.web;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -111,15 +114,23 @@ public class BoardServlet extends HttpServlet {
 		}
 		for (Cookie cookie : cookies) {
 			if ("nickname".equals(cookie.getName())) {
-				return cookie.getValue();
+				try {
+					return URLDecoder.decode(cookie.getValue(), "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					//not occur
+				}
 			}
 		}
 		return null;
 	}
 	private void setNicknameToCookie(HttpServletResponse res, String nickname) {
-		Cookie cookie = new Cookie("nickname", nickname);
-		cookie.setMaxAge(60 * 60 * 24 * 30);// 1 month
-		res.addCookie(cookie);
+		try {
+			Cookie cookie = new Cookie("nickname", URLEncoder.encode(nickname, "utf-8"));
+			cookie.setMaxAge(60 * 60 * 24 * 30);// 1 month
+			res.addCookie(cookie);
+		} catch (UnsupportedEncodingException e) {
+			//not occur
+		}
 	}
 
 	public static class Message {
