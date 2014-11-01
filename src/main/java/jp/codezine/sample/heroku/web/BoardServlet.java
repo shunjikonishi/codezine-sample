@@ -39,6 +39,7 @@ public class BoardServlet extends HttpServlet {
 					ResultSet rs = stmt.executeQuery();
 					try {
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						sdf.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 						while(rs.next()) {
 							Message msg = new Message();
 							msg.nickname = rs.getString("nickname");
