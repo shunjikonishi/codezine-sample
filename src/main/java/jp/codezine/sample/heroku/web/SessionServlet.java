@@ -32,8 +32,13 @@ public class SessionServlet extends HttpServlet {
 		if (message == null) {
 			message = "";
 		}
+		String dyno = System.getenv("DYNO");
+		if (dyno == null) {
+			dyno = "None";
+		}
 		Map<String, Object> params = new HashMap<>();
 		params.put("message", message);
+		params.put("dyno", dyno);
 		params.put("title", "セッションサンプル");
 		TemplateEngine.merge(res, "session/session.html", params);
 	}
