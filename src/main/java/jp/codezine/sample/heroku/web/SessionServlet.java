@@ -34,12 +34,14 @@ public class SessionServlet extends HttpServlet {
 		}
 		String dyno = System.getenv("DYNO");
 		if (dyno == null) {
-			dyno = "None";
+			dyno = "null";
 		}
-		System.out.println("SessionServlet#doGet: " + System.getenv("DYNO") + ": " + req.getSession().getId() + ": " + message);
+		String sessionId = req.getSession().getId();
+		System.out.println("SessionServlet#doPost: " + dyno + ": " + sessionId + ": " + message);
 		Map<String, Object> params = new HashMap<>();
 		params.put("message", message);
 		params.put("dyno", dyno);
+		params.put("sessionId", sessionId);
 		params.put("title", "セッションサンプル");
 		TemplateEngine.merge(res, "session/session.html", params);
 	}
