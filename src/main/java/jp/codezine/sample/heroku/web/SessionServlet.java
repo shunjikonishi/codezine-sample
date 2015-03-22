@@ -36,6 +36,7 @@ public class SessionServlet extends HttpServlet {
 		if (dyno == null) {
 			dyno = "None";
 		}
+		System.out.println("SessionServlet#doGet: " + System.getenv("DYNO") + ": " + message);
 		Map<String, Object> params = new HashMap<>();
 		params.put("message", message);
 		params.put("dyno", dyno);
@@ -47,6 +48,7 @@ public class SessionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String message = req.getParameter("message");
+		System.out.println("SessionServlet#doPost: " + System.getenv("DYNO") + ": " + message);
 		req.getSession().setAttribute("message", message);
 		res.sendRedirect("/session");
 	}
